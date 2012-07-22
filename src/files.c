@@ -290,12 +290,13 @@ int cp_file(const char *source, const char *dest)
 		get_short_filename(source, short_filename);
 		sprintf(dest_filename, "%s/%s", dest, short_filename);
 		fp_dest = fopen(dest_filename, "w+");
-	}else{
+	} else{
 		fp_dest = fopen(dest, "wb");
 	}
 
 	if (fp_dest == NULL) {
 		printf("Could not open file %s : %s\n", dest, strerror(errno));
+		fclose(fp_source);
 		return -1;
 	}
 
