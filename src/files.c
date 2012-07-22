@@ -482,10 +482,8 @@ int process_files(struct s_tree_elt *tree)
 		}
 	}
 	
-	if (cp_dir("./bootstrap", OUTPUT_PATH) < 0)
-		printf("Couldn't copy dir\n");
-
-	cp_file("./custom.css", OUTPUT_PATH);
+	if (cp_dir("../extra", OUTPUT_PATH) < 0)
+		printf("Couldn't copy extra dir\n");
 
 	return 0;
 }
