@@ -53,16 +53,18 @@ int convert_mkd_to_html(char *input, char **output)
 	*output = malloc(ob->size+1);
 	if (*output == NULL) {
 		printf("Memory allocation error\n");
-		return -1;
+		goto err;
 	}
 
 	memcpy(*output, ob->data, ob->size);
 	(*output)[ob->size] = '\0';
+
 	/* cleanup */
 	bufrelease(ib);
 	bufrelease(ob);
-	
-	return (ret < 0) ? -1 : 0;
+	return 0;
+err:
+	bufrelease(ib);
+	bufrelease(ob);
+	return -1;
 }
-
-
