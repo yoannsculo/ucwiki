@@ -10,7 +10,7 @@
 
 #include "files.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
 	int ret;
 
@@ -22,7 +22,6 @@ int main(int argc, char **argv)
 	if ((ret = process_files(tree)) < 0)
 		goto err;
 
-end:
 	return ret;
 
 err:
