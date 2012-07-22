@@ -17,10 +17,15 @@ int main(int argc, char **argv)
 	struct s_tree_elt tree[200];
 	
 	if ((ret = process_tree(tree)) < 0)
-		return ret;
+		goto err;
 
 	if ((ret = process_files(tree)) < 0)
-		return ret;
-	
+		goto err;
+
+end:
+	return ret;
+
+err:
+	fprintf(stderr, "Error in wiki generation.\n");
 	return ret;
 }
