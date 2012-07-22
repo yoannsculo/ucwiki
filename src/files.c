@@ -179,7 +179,6 @@ int get_html_url(char *filename, char *html_filename)
 	remove_extension(short_filename, short_filename);
 
 	sprintf(html_filename, "%s/%s/%s.html", OUTPUT_PATH, current_dir, short_filename);
-
 	return 0;
 }
 
@@ -468,17 +467,10 @@ int process_files(struct s_tree_elt *tree)
 		if (is_dir(tree[i].name)) {
 			sprintf(path, "%s/%s", OUTPUT_PATH, tree[i].name+2);
 			create_dir(path);
+		} else if (!is_markdown_file(tree[i].name)) {
+			// TODO : cp
 		} else {
-			char output[PATH_MAX];
-			char *buffer = NULL;
-			
-			get_html_url(tree[i].name, output);
-			convert_mkd_to_html(tree[i].name, &buffer);
-			// fprintf(stderr, "%s\n\n", buffer);	
-			create_html_page(output, buffer, tree);
-
-			if (buffer != NULL)
-				free(buffer);
+			create_html_page(tree+i, tree);
 		}
 	}
 	

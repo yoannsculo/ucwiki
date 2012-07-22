@@ -1,8 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <errno.h>
 #include <string.h>
 #include "files.h"
 #include "render_html.h"
+
+#include "markup.h"
 
 void render_navbar(FILE *fp)
 {
@@ -18,7 +21,7 @@ void render_navbar(FILE *fp)
 	fputs("</div>\n", fp);
 }
 
-void render_sidebar(FILE *fp, struct s_tree_elt *tree)
+void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page)
 {
 	int i;
 	
@@ -39,6 +42,12 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree)
 
 		if (!is_markdown_file(tree[i].name) && !is_dir(tree[i].name))
 			continue;
+		int j;
+		char depth_str[250];
+		strcpy(depth_str, "");
+		// for (j=0;j<tree[i].depth;j++) {
+		// 	strcat(depth_str, "../");
+		// }
 
 		if (is_dir(tree[i].name)) {
 			get_short_filename(tree[i].name, short_filename);
@@ -46,7 +55,7 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree)
 		} else {
 			get_short_filename_no_ext(tree[i].name, short_filename);
 			get_html_url(tree[i].name, filename);
-			sprintf(string, "<li><a href=\"%s\">%s</a></li>", filename, short_filename);
+			sprintf(string, "<li><a href=\"%s%s\">%s</a></li>", depth_str, filename, short_filename);
 		}
 		fputs(string, fp);
 	}
@@ -56,13 +65,29 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree)
 
 }
 
-int create_html_page(char *output, char *buffer, struct s_tree_elt *tree)
+int create_html_page(struct s_tree_elt *file, struct s_tree_elt *tree)
 {
+	char output[PATH_MAX];
+	char *buffer = NULL;
 	FILE *fp;
+	int ret = 0;
+	char html_str[500];
 
-	if (output == NULL || buffer == NULL)
-		goto err;
+	if (file == NULL || tree == NULL)
+		goto early_err;
+
+	get_html_url(file->name, output);
 	
+	if ((ret = convert_mkd_to_html(file->name, &buffer)) < 0) // TODO use struct s_tree_elt *tree ?
+		goto err;
+
+	int i;
+	char depth_str[250];
+	strcpy(depth_str, "");
+	for (i=0;i<file->depth;i++) {
+		strcat(depth_str, "../");
+	}
+
 	fp = fopen(output, "w");
 	if (!fp) {
 		fprintf(stderr, "Unable to open file %s : %s\n", output, strerror(errno));
@@ -73,9 +98,12 @@ int create_html_page(char *output, char *buffer, struct s_tree_elt *tree)
 	fputs("<html xmlns=\"http://www.w3.org/1999/xhtml\" dir=\"ltr\" lang=\"fr-FR\">\n", fp);
 	fputs("<head>\n", fp);
 	fputs("	<meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\">\n", fp);
-	fputs("	<link href=\"http://localhost/doc/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n", fp);
-	fputs("	<link href=\"http://localhost/doc/custom.css\" type=\"text/css\" rel=\"stylesheet\">\n", fp);
+	sprintf(html_str, " <link href=\"%s/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n", depth_str);
+	fputs(html_str, fp);
+	sprintf(html_str, " <link href=\"%s/custom.css\" type=\"text/css\" rel=\"stylesheet\">\n", depth_str);
+	fputs(html_str, fp);
 	fputs("</head>\n", fp);
+
 	fputs("<body>\n", fp);
 
 	render_navbar(fp);
@@ -84,7 +112,7 @@ int create_html_page(char *output, char *buffer, struct s_tree_elt *tree)
 	fputs("<div class=\"row-fluid\">\n", fp);
 	fputs("<div class=\"span3\">\n", fp);
 
-	render_sidebar(fp, tree);
+	render_sidebar(fp, tree, file);
 
 	fputs("</div>\n", fp);
 
@@ -96,8 +124,13 @@ int create_html_page(char *output, char *buffer, struct s_tree_elt *tree)
 	fputs("</body>\n", fp);
 	fputs("</html>\n", fp);
 
-	fclose(fp);
-	return 0;
 err:
+	if (buffer != NULL)
+		free(buffer);
+	if (fp != NULL)
+		fclose(fp);
+	return ret;
+
+early_err:
 	return -1;
 }
