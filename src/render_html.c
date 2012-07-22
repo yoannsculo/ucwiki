@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <errno.h>
+#include <string.h>
 #include "files.h"
 #include "render_html.h"
 
@@ -64,7 +65,7 @@ int create_html_page(char *output, char *buffer, struct s_tree_elt *tree)
 	
 	fp = fopen(output, "w");
 	if (!fp) {
-		printf("Unable to open file %s : %s\n", output, strerror(errno));
+		fprintf(stderr, "Unable to open file %s : %s\n", output, strerror(errno));
 		goto err;
 	}
 
@@ -95,7 +96,6 @@ int create_html_page(char *output, char *buffer, struct s_tree_elt *tree)
 	fputs("</body>\n", fp);
 	fputs("</html>\n", fp);
 
-end:
 	fclose(fp);
 	return 0;
 err:

@@ -8,6 +8,7 @@
 #include "files.h"
 
 #include "render_html.h" // TODO : move
+#include "markup.h"
 
 int is_dir(const char *path)
 {
@@ -125,8 +126,15 @@ int get_short_filename(char *filename, char *short_filename)
 
 int get_short_filename_no_ext(char *filename, char *short_filename)
 {
-	get_short_filename(filename, short_filename);
-	remove_extension(short_filename, short_filename);
+	int ret = 0;
+
+	if ((ret = get_short_filename(filename, short_filename)) < 0)
+		return ret;
+
+	if ((ret = remove_extension(short_filename, short_filename)) < 0)
+		return ret;
+
+	return ret;
 }
 
 int remove_extension(char *ext_filename, char *filename)
@@ -287,7 +295,7 @@ int cp_file(const char *source, const char *dest)
 	}
 	
 	if (is_dir(dest)) {
-		get_short_filename(source, short_filename);
+		get_short_filename((char *)source, short_filename);
 		sprintf(dest_filename, "%s/%s", dest, short_filename);
 		fp_dest = fopen(dest_filename, "w+");
 	} else{
