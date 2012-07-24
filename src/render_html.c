@@ -15,7 +15,7 @@ void render_navbar(FILE *fp)
 	fputs("<div class=\"navbar navbar-fixed-top\">\n", fp);
 	fputs("	<div class=\"navbar-inner\">\n", fp);
 	fputs("		<div class=\"container-fluid\">\n", fp);
-	fputs("			<a class=\"brand\" href=\"#\">ucDoc</a>\n", fp);
+	fputs("			<a class=\"brand\" href=\"#\">µcWiki</a><span style=\"display: block;padding-top:10px;\"> - The tiny wiki engine</span>\n", fp);
 	fputs("		</div>\n", fp);
 	fputs("	</div>\n", fp);
 	fputs("</div>\n", fp);
@@ -120,6 +120,7 @@ int create_html_page(struct s_tree_elt *file, struct s_tree_elt *tree)
 	fputs("<div class=\"well\">\n", fp);
 	fputs(buffer, fp);
 	fputs("</div>\n", fp);
+	fputs("<footer class=\"well\">Powered by <a href=\"https://github.com/yoannsculo/ucwiki\">µcwiki</a> and <a href=\"http://twitter.github.com/bootstrap\">bootstrap</a>.</footer>\n", fp);
 	fputs("</div>\n", fp);
 	fputs("</body>\n", fp);
 	fputs("</html>\n", fp);
