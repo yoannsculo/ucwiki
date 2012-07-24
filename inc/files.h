@@ -4,6 +4,7 @@
 #include <dirent.h>
 
 #define OUTPUT_PATH	"./tmp"
+#define INPUT_PATH	"./doc"
 
 enum {
 	E_TYPE_FILE,
@@ -37,7 +38,7 @@ int create_dir(const char *dirname);
 int cp_file(const char *source, const char *dest);
 int cp_dir(const char *source, const char *dest);
 
-int process_tree(struct s_tree_elt *tree);
+int process_tree(struct s_tree_elt *tree, char *input_dir);
 int process_files(struct s_tree_elt *tree);
 
 #endif

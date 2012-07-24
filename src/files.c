@@ -431,22 +431,17 @@ err:
 }
 
 
-int process_tree(struct s_tree_elt *tree)
+int process_tree(struct s_tree_elt *tree, char *input_dir)
 {
 	int i;
+
+	if (input_dir == NULL)
+		return -1;
 
 	for (i=0;i<200;i++) {
 		tree[i].name[0] = '\0';
 	}
-
-	parse_dir("./doc", tree);
-
-	// for (i=0;i<200;i++) {
-	// 	if (tree[i].name[0] == '\0')
-	// 		break;
-
-	// 	printf("%s\n", tree[i].name);
-	// }
+	parse_dir(input_dir, tree);
 
 	return 0;
 }
@@ -459,11 +454,10 @@ int process_files(struct s_tree_elt *tree)
 	char path[PATH_MAX];
 
 	create_dir(OUTPUT_PATH);
-
 	for (i=0;i<200;i++) {
 		if (tree[i].name[0] == '\0')
 			break;
-		
+
 		if (is_dir(tree[i].name)) {
 			sprintf(path, "%s/%s", OUTPUT_PATH, tree[i].name+2);
 			create_dir(path);
