@@ -21,11 +21,11 @@ void render_navbar(FILE *fp)
 	fputs("</div>\n", fp);
 }
 
-void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page)
+void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page, char *output_dir)
 {
 	int i;
 	
-	if (fp == NULL)
+	if (fp == NULL || tree == NULL || page == NULL || output_dir == NULL)
 		return;
 
 	fputs("<div class=\"well sidebar-nav\">\n", fp);
@@ -54,7 +54,7 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page)
 			sprintf(string, "<li class=\"nav-header\">%s</li>", short_filename);
 		} else {
 			get_short_filename_no_ext(tree[i].name, short_filename);
-			get_html_url(tree[i].name, filename);
+			get_html_url(tree[i].name, output_dir, filename);
 			sprintf(string, "<li><a href=\"%s%s\">%s</a></li>", depth_str, filename, short_filename);
 		}
 		fputs(string, fp);
@@ -65,7 +65,7 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page)
 
 }
 
-int create_html_page(struct s_tree_elt *file, struct s_tree_elt *tree)
+int create_html_page(struct s_tree_elt *file, struct s_tree_elt *tree, char *output_dir)
 {
 	char output[PATH_MAX];
 	char *buffer = NULL;
@@ -73,10 +73,10 @@ int create_html_page(struct s_tree_elt *file, struct s_tree_elt *tree)
 	int ret = 0;
 	char html_str[500];
 
-	if (file == NULL || tree == NULL)
+	if (file == NULL || tree == NULL || output_dir == NULL)
 		goto early_err;
 
-	get_html_url(file->name, output);
+	get_html_url(file->name, output_dir, output);
 	
 	if ((ret = convert_mkd_to_html(file->name, &buffer)) < 0) // TODO use struct s_tree_elt *tree ?
 		goto err;
@@ -112,7 +112,7 @@ int create_html_page(struct s_tree_elt *file, struct s_tree_elt *tree)
 	fputs("<div class=\"row-fluid\">\n", fp);
 	fputs("<div class=\"span3\">\n", fp);
 
-	render_sidebar(fp, tree, file);
+	render_sidebar(fp, tree, file, output_dir);
 
 	fputs("</div>\n", fp);
 

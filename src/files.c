@@ -164,21 +164,21 @@ int remove_extension(char *ext_filename, char *filename)
 }
 
 
-int get_html_url(char *filename, char *html_filename)
+int get_html_url(char *filename, char *output_dir, char *html_filename)
 {
 	char current_dir[PATH_MAX];
 	char short_filename[255];
 
-	if (filename == NULL || html_filename == NULL)
+	if (filename == NULL || html_filename == NULL || output_dir == NULL)
 		return -1;
 
-	strcpy(html_filename, OUTPUT_PATH);
+	strcpy(html_filename, output_dir);
 	
 	get_current_dir(filename, current_dir);
 	get_short_filename(filename, short_filename);
 	remove_extension(short_filename, short_filename);
 
-	sprintf(html_filename, "%s/%s/%s.html", OUTPUT_PATH, current_dir, short_filename);
+	sprintf(html_filename, "%s/%s/%s.html", output_dir, current_dir, short_filename);
 	return 0;
 }
 
@@ -448,28 +448,29 @@ int process_tree(struct s_tree_elt *tree, char *input_dir)
 
 
 
-int process_files(struct s_tree_elt *tree)
+int process_files(struct s_tree_elt *tree, char *output_dir)
 {
 	int i;
 	char path[PATH_MAX];
 
-	create_dir(OUTPUT_PATH);
+	if (output_dir == NULL)
+		return -1;
+
+	create_dir(output_dir);
+
 	for (i=0;i<200;i++) {
 		if (tree[i].name[0] == '\0')
 			break;
 
 		if (is_dir(tree[i].name)) {
-			sprintf(path, "%s/%s", OUTPUT_PATH, tree[i].name+2);
+			sprintf(path, "%s/%s", output_dir, tree[i].name+2);
 			create_dir(path);
 		} else if (!is_markdown_file(tree[i].name)) {
 			// TODO : cp
 		} else {
-			create_html_page(tree+i, tree);
+			create_html_page(tree+i, tree, output_dir);
 		}
 	}
 	
-	if (cp_dir("../extra", OUTPUT_PATH) < 0)
-		printf("Couldn't copy extra dir\n");
-
 	return 0;
 }

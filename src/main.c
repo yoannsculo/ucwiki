@@ -62,8 +62,11 @@ int main(int argc, char * argv[])
 	if ((ret = process_tree(tree, input)) < 0)
 		goto err;
 
-	if ((ret = process_files(tree)) < 0)
+	if ((ret = process_files(tree, output)) < 0)
 		goto err;
+
+	if (cp_dir("../extra", output) < 0)
+		printf("Couldn't copy extra dir\n");
 
 	return ret;
 err:

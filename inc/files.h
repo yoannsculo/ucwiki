@@ -28,7 +28,7 @@ int get_short_filename(char *filename, char *short_filename);
 int get_short_filename_no_ext(char *filename, char *short_filename);
 int remove_extension(char *ext_filename, char *filename);
 
-int get_html_url(char *filename, char *html_filename);
+int get_html_url(char *filename, char *output_dir, char *html_filename);
 
 int is_markdown_file(char *filename);
 int is_html_file(char *filename);
@@ -39,6 +39,6 @@ int cp_file(const char *source, const char *dest);
 int cp_dir(const char *source, const char *dest);
 
 int process_tree(struct s_tree_elt *tree, char *input_dir);
-int process_files(struct s_tree_elt *tree);
+int process_files(struct s_tree_elt *tree, char *output_dir);
 
 #endif
