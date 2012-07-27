@@ -42,20 +42,23 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page, 
 
 		if (!is_markdown_file(tree[i].name) && !is_dir(tree[i].name))
 			continue;
+
 		int j;
 		char depth_str[250];
 		strcpy(depth_str, "");
-		// for (j=0;j<tree[i].depth;j++) {
-		// 	strcat(depth_str, "../");
-		// }
+
+		/* path to root dir */
+		for (j=0;j<=page->depth;j++) {
+			strcat(depth_str, "../");
+		}
 
 		if (is_dir(tree[i].name)) {
 			get_short_filename(tree[i].name, short_filename);
-			sprintf(string, "<li class=\"nav-header\">%s</li>", short_filename);
+			sprintf(string, "<li class=\"nav-header\">%s</li>\n", short_filename);
 		} else {
 			get_short_filename_no_ext(tree[i].name, short_filename);
 			get_html_url(tree[i].name, output_dir, filename);
-			sprintf(string, "<li><a href=\"%s%s\">%s</a></li>", depth_str, filename, short_filename);
+			sprintf(string, "<li><a href=\"%s%s\">%s</a>\n</li>", depth_str, filename, short_filename);
 		}
 		fputs(string, fp);
 	}
