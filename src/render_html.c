@@ -58,7 +58,7 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page, 
 		} else {
 			get_short_filename_no_ext(tree[i].name, short_filename);
 			get_html_url(tree[i].name, output_dir, filename);
-			sprintf(string, "<li><a href=\"%s%s\">%s</a>\n</li>", depth_str, filename, short_filename);
+			sprintf(string, "<li><a href=\"%s%s\">%s</a></li>\n", depth_str, filename, short_filename);
 		}
 		fputs(string, fp);
 	}
