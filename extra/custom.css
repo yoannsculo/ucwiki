@@ -44,3 +44,6 @@ blockquote p {
 	text-align : justify;
 }
 
+.nav-list li a {
+	    padding: 0px 0px;
+}

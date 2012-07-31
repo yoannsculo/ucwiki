@@ -24,18 +24,17 @@ void render_navbar(FILE *fp)
 void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page, char *output_dir)
 {
 	int i;
-	
+	int prev_depth = 0;
+
 	if (fp == NULL || tree == NULL || page == NULL || output_dir == NULL)
 		return;
 
 	fputs("<div class=\"well sidebar-nav\">\n", fp);
-	fputs("	<ul class=\"nav nav-list\">\n", fp);
-	fputs("		<li class=\"nav-header\">Sidebar</li>\n", fp);
 	
 	for (i=0;i<200;i++) {
 		char filename[255];
 		char short_filename[255];
-		char string[600];
+		char string[600] = "";
 
 		if (tree[i].name[0] == '\0')
 			break;
@@ -52,20 +51,27 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page, 
 			strcat(depth_str, "../");
 		}
 
+		if (tree[i].depth > prev_depth && i != 0)
+			strcat(string, "<ul>\n");
+
+		if (tree[i].depth < prev_depth)
+			strcat(string, "</ul>\n");
+
 		if (is_dir(tree[i].name)) {
 			get_short_filename(tree[i].name, short_filename);
-			sprintf(string, "<li class=\"nav-header\">%s</li>\n", short_filename);
+			sprintf(string, "%s<li>%s</li>\n", string, short_filename);
 		} else {
 			get_short_filename_no_ext(tree[i].name, short_filename);
 			get_html_url(tree[i].name, output_dir, filename);
-			sprintf(string, "<li><a href=\"%s%s\">%s</a></li>\n", depth_str, filename, short_filename);
+			sprintf(string, "%s<li><a href=\"%s%s\">%s</a></li>\n", string, depth_str, filename, short_filename);
 		}
+
+		prev_depth = tree[i].depth;
 		fputs(string, fp);
 	}
 
 	fputs("	</ul>\n", fp);
 	fputs("</div>\n", fp);
-
 }
 
 int create_html_page(struct s_tree_elt *file, struct s_tree_elt *tree, char *output_dir)
