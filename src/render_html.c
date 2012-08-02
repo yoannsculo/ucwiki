@@ -54,8 +54,13 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page, 
 		if (tree[i].depth > prev_depth && i != 0)
 			strcat(string, "<ul>\n");
 
-		if (tree[i].depth < prev_depth)
-			strcat(string, "</ul>\n");
+		if (tree[i].depth < prev_depth) {
+			int k;
+			for (k=0;k<(prev_depth-tree[i].depth);k++)
+				strcat(string, "</ul>");
+
+			strcat(string, "\n");
+		}
 
 		if (is_dir(tree[i].name)) {
 			get_short_filename(tree[i].name, short_filename);
