@@ -1,5 +1,8 @@
-ucwiki is a tiny and static C wiki engine. Meant to be as simple as possible.
-We just give a directory path as input, and the ucwiki transforms markup
+µcwiki
+======
+
+µcwiki is a tiny and static C wiki engine. Meant to be as simple as possible.
+We just give a directory path as input, and the µcwiki transforms markup
 files into nice html pages powered with bootstrap.
 
 Notice
