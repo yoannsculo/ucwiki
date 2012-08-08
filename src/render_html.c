@@ -29,8 +29,8 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page, 
 	if (fp == NULL || tree == NULL || page == NULL || output_dir == NULL)
 		return;
 
-	fputs("<div class=\"well sidebar-nav\">\n", fp);
-	
+	fputs("<ul id=\"browser\" class=\"filetree\">\n", fp);
+
 	for (i=0;i<200;i++) {
 		char filename[255];
 		char short_filename[255];
@@ -57,18 +57,18 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page, 
 		if (tree[i].depth < prev_depth) {
 			int k;
 			for (k=0;k<(prev_depth-tree[i].depth);k++)
-				strcat(string, "</ul>");
+				strcat(string, "</ul></li>");
 
 			strcat(string, "\n");
 		}
 
 		if (is_dir(tree[i].name)) {
 			get_short_filename(tree[i].name, short_filename);
-			sprintf(string, "%s<li>%s</li>\n", string, short_filename);
+			sprintf(string, "%s<li><span class=\"folder\">%s</span>\n", string, short_filename);
 		} else {
 			get_short_filename_no_ext(tree[i].name, short_filename);
 			get_html_url(tree[i].name, output_dir, filename);
-			sprintf(string, "%s<li><a href=\"%s%s\">%s</a></li>\n", string, depth_str, filename, short_filename);
+			sprintf(string, "%s<li><span class=\"file\"><a href=\"%s%s\">%s</a></span></li>\n", string, depth_str, filename, short_filename);
 		}
 
 		prev_depth = tree[i].depth;
@@ -76,7 +76,6 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page, 
 	}
 
 	fputs("	</ul>\n", fp);
-	fputs("</div>\n", fp);
 }
 
 int create_html_page(struct s_tree_elt *file, struct s_tree_elt *tree, char *output_dir)
@@ -115,6 +114,16 @@ int create_html_page(struct s_tree_elt *file, struct s_tree_elt *tree, char *out
 	sprintf(html_str, " <link href=\"%s/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n", depth_str);
 	fputs(html_str, fp);
 	sprintf(html_str, " <link href=\"%s/custom.css\" type=\"text/css\" rel=\"stylesheet\">\n", depth_str);
+	fputs(html_str, fp);
+	sprintf(html_str, " <link href=\"%s/jzaefferer-jquery-treeview-3937863/jquery.treeview.css\" type=\"text/css\" rel=\"stylesheet\">\n\n", depth_str);
+	fputs(html_str, fp);
+	sprintf(html_str, " <script src=\"%s/jzaefferer-jquery-treeview-3937863/lib/jquery.js\" type=\"text/javascript\"></script>\n", depth_str);
+	fputs(html_str, fp);
+	sprintf(html_str, " <script src=\"%s/jzaefferer-jquery-treeview-3937863/lib/jquery.cookie.js\" type=\"text/javascript\"></script>\n", depth_str);
+	fputs(html_str, fp);
+	sprintf(html_str, " <script src=\"%s/jzaefferer-jquery-treeview-3937863/jquery.treeview.js\" type=\"text/javascript\"></script>\n", depth_str);
+	fputs(html_str, fp);
+	sprintf(html_str, " <script src=\"%s/jzaefferer-jquery-treeview-3937863/demo/demo.js\" type=\"text/javascript\"></script>\n", depth_str);
 	fputs(html_str, fp);
 	fputs("</head>\n", fp);
 
