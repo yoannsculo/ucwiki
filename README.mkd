@@ -1,7 +1,7 @@
-µcwiki
+[µcwiki](https://github.com/yoannsculo/ucwiki)
 ======
 
-µcwiki is a tiny and static C wiki engine. Meant to be as simple as possible.
+`µcwiki` is a tiny and static C wiki engine. Meant to be as simple as possible.
 We just give a directory path as input, and the µcwiki transforms markup
 files into nice html pages powered with bootstrap.
 
@@ -13,6 +13,7 @@ Notice
 How to build it
 ---------------
 
+	git submodule update
 	make
 
 Usage
@@ -35,7 +36,10 @@ input and output directories.
 TODO LIST
 ---------
 
-- daemonize ucwiki to run in background and detect changes.
+- [WISH] daemonize ucwiki to run in background and detect changes.
+- [BUG] ./ucwiki -i input -o output doesn't work
+- [WISH] handle yaml headers
+- [WISH] add a whitelist to copy just the files we need in extra.
 
 Dependencies
 ------------
