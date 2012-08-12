@@ -5,11 +5,19 @@
 We just give a directory path as input, and the µcwiki transforms markup
 files into nice html pages powered with bootstrap.
 
+The project is still in development, you can encounter some dirty bugs. Please don't
+hesitate to give me feedback. Thanks.
+
 How to build it
 ---------------
 
 	git submodule update
 	make
+
+How to run it
+-------------
+
+	./ucwiki
 
 Usage
 -----
@@ -18,15 +26,17 @@ Usage
 	       -i	: input directory
 	       -o	: output directory
 
-How to run it
--------------
-
-	./ucwiki
-
 By default, input dir is `doc` and output dir is `tmp`. But you can specify
-input and output directories. 
+input and output directories.
 
-	./ucwiki -i ./input -o ./output
+	./ucwiki -i ./example -o ./output
+
+For instance, just start your web browser here to see the result:
+
+	firefox ./output
+
+See, [markdown](http://daringfireball.net/projects/markdown/syntax/) syntax to
+start your wiki.
 
 TODO LIST
 ---------
@@ -35,6 +45,7 @@ TODO LIST
 - [BUG] ./ucwiki -i input -o output doesn't work
 - [WISH] handle yaml headers
 - [WISH] add a whitelist to copy just the files we need in extra.
+- [WISH] add an index.html at root dir
 
 Dependencies
 ------------
