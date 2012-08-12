@@ -8,8 +8,9 @@
 
 void usage()
 {
-	printf("Usage: -d\t: daemonize\n");
+	// printf("Usage: -d\t: daemonize\n");
 	// printf("       -k\t: stop daemon\n");
+	printf("Usage: ucwiki [OPTIONS]\n");
 	printf("       -i\t: input directory\n");
 	printf("       -o\t: output directory\n");
 }
@@ -34,9 +35,9 @@ int main(int argc, char * argv[])
 			// case 'd':
 			// 	daemon = 1;
 			// 	break;
-			case 'k':
-				// TODO
-				break;
+			// case 'k':
+			// 	// TODO
+			// 	break;
 			case 'i':
 				if (!is_dir(optarg)) {
 					printf("Error : input directory doesn't exist\n");
