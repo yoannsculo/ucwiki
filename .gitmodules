@@ -1,3 +1,6 @@
 [submodule "extra/bootstrap"]
 	path = extra/bootstrap
 	url = git://github.com/twitter/bootstrap.git
+[submodule "extra/jquery-treeview"]
+	path = extra/jquery-treeview
+	url = git://github.com/jzaefferer/jquery-treeview.git
