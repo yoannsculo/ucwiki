@@ -5,11 +5,6 @@
 We just give a directory path as input, and the µcwiki transforms markup
 files into nice html pages powered with bootstrap.
 
-Notice
-------
-
-**I'm currently on very early development phase.**
-
 How to build it
 ---------------
 
