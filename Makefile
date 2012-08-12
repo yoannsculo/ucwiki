@@ -14,10 +14,13 @@ INCLUDES = -Iinc \
 CFLAGS = -W -Wall -g
 LDFLAGS = -L/usr/lib -L$(BUILD_PATH)
 
-all: prepare sundown $(EXEC)
+all: prepare sundown_lib $(EXEC)
 
 prepare:
 	mkdir -p $(BUILD_PATH)
+
+sundown_lib:
+	make -C $(SD_PATH) libsundown.a
 
 $(BUILD_PATH)/%.o: src/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
@@ -25,8 +28,6 @@ $(BUILD_PATH)/%.o: src/%.c
 $(EXEC): $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-sundown:
-	make -C $(SD_PATH) libsundown.a
 
 strip:
 	strip $(EXEC)
