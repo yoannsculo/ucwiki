@@ -37,6 +37,13 @@ TODO LIST
 
 - daemonize ucwiki to run in background and detect changes.
 
+Dependencies
+------------
+
+- [sundown](https://github.com/vmg/sundown) - to render markdown files into html pages
+- [jQuery Treeview](https://github.com/jzaefferer/jquery-treeview) - for a fancy tree
+- [bootsrap](https://github.com/twitter/bootstrap/) - for a fancy css
+
 LICENCE
 -------
 
