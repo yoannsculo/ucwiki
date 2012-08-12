@@ -111,19 +111,19 @@ int create_html_page(struct s_tree_elt *file, struct s_tree_elt *tree, char *out
 	fputs("<html xmlns=\"http://www.w3.org/1999/xhtml\" dir=\"ltr\" lang=\"fr-FR\">\n", fp);
 	fputs("<head>\n", fp);
 	fputs("	<meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\">\n", fp);
-	sprintf(html_str, " <link href=\"%s/bootstrap/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n", depth_str);
+	sprintf(html_str, " <link href=\"%s/bootstrap/docs/assets/css/bootstrap.css\" type=\"text/css\" rel=\"stylesheet\">\n", depth_str);
 	fputs(html_str, fp);
 	sprintf(html_str, " <link href=\"%s/custom.css\" type=\"text/css\" rel=\"stylesheet\">\n", depth_str);
 	fputs(html_str, fp);
-	sprintf(html_str, " <link href=\"%s/jzaefferer-jquery-treeview-3937863/jquery.treeview.css\" type=\"text/css\" rel=\"stylesheet\">\n\n", depth_str);
+	sprintf(html_str, " <link href=\"%s/jquery-treeview/jquery.treeview.css\" type=\"text/css\" rel=\"stylesheet\">\n\n", depth_str);
 	fputs(html_str, fp);
-	sprintf(html_str, " <script src=\"%s/jzaefferer-jquery-treeview-3937863/lib/jquery.js\" type=\"text/javascript\"></script>\n", depth_str);
+	sprintf(html_str, " <script src=\"%s/bootstrap/docs/assets/js/jquery.js\" type=\"text/javascript\"></script>\n", depth_str);
 	fputs(html_str, fp);
-	sprintf(html_str, " <script src=\"%s/jzaefferer-jquery-treeview-3937863/lib/jquery.cookie.js\" type=\"text/javascript\"></script>\n", depth_str);
+	sprintf(html_str, " <script src=\"%s/jquery-treeview/lib/jquery.cookie.js\" type=\"text/javascript\"></script>\n", depth_str);
 	fputs(html_str, fp);
-	sprintf(html_str, " <script src=\"%s/jzaefferer-jquery-treeview-3937863/jquery.treeview.js\" type=\"text/javascript\"></script>\n", depth_str);
+	sprintf(html_str, " <script src=\"%s/jquery-treeview/jquery.treeview.js\" type=\"text/javascript\"></script>\n", depth_str);
 	fputs(html_str, fp);
-	sprintf(html_str, " <script src=\"%s/jzaefferer-jquery-treeview-3937863/demo/demo.js\" type=\"text/javascript\"></script>\n", depth_str);
+	sprintf(html_str, " <script src=\"%s/jquery-treeview/demo/demo.js\" type=\"text/javascript\"></script>\n", depth_str);
 	fputs(html_str, fp);
 	fputs("</head>\n", fp);
 
