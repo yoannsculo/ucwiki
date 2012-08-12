@@ -15,9 +15,29 @@ How to build it
 
 	make
 
+Usage
+-----
+
+	Usage: ucwiki [OPTIONS]
+	       -i	: input directory
+	       -o	: output directory
+
 How to run it
 -------------
 
-	cd build
 	./ucwiki
 
+By default, input dir is `doc` and output dir is `tmp`. But you can specify
+input and output directories. 
+
+	./ucwiki -i ./input -o ./output
+
+TODO LIST
+---------
+
+- daemonize ucwiki to run in background and detect changes.
+
+LICENCE
+-------
+
+Noy yet decided.
