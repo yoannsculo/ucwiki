@@ -1,0 +1,58 @@
+[µcwiki](https://github.com/yoannsculo/ucwiki)
+----------------------------------------------
+
+µcwiki is a tiny and static C wiki engine. Meant to be as simple as possible.
+We just give a directory path as input, and the µcwiki transforms markup
+files into nice html pages powered with bootstrap.
+
+How to build it
+---------------
+
+	git submodule update
+	make
+
+How to run it
+-------------
+
+	./ucwiki
+
+Usage
+-----
+
+	Usage: ucwiki [OPTIONS]
+	       -i	: input directory
+	       -o	: output directory
+
+By default, input dir is doc and output dir is tmp. But you can specify
+input and output directories. 
+
+	./ucwiki -i ./example -o ./output
+
+For instance, just start your web browser here to see the result:
+
+	firefox ./output
+
+See, [markdown](http://daringfireball.net/projects/markdown/syntax/) syntax to
+start your wiki.
+
+
+TODO LIST
+---------
+
+- [WISH] daemonize ucwiki to run in background and detect changes.
+- [BUG] ./ucwiki -i input -o output doesn't work
+- [WISH] handle yaml headers
+- [WISH] add a whitelist to copy just the files we need in extra.
+- [WISH] add an index.html at root dir
+
+Dependencies
+------------
+
+- [sundown](https://github.com/vmg/sundown) - to render markdown files into html pages
+- [jQuery Treeview](https://github.com/jzaefferer/jquery-treeview) - for a fancy tree
+- [bootstrap](https://github.com/twitter/bootstrap/) - for a fancy css
+
+LICENCE
+-------
+
+Noy yet decided.

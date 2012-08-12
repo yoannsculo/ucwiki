@@ -18,6 +18,7 @@ all: prepare sundown_lib $(EXEC)
 
 prepare:
 	mkdir -p $(BUILD_PATH)
+	cp -R example $(BUILD_PATH)
 
 sundown_lib:
 	make -C $(SD_PATH) libsundown.a
