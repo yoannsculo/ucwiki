@@ -1,7 +1,7 @@
 CC = gcc
 BUILD_PATH = build
 EXEC = $(BUILD_PATH)/ucwiki
-SD_PATH=tanoku-sundown-11d2add
+SD_PATH=sundown
 SRC  = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=$(BUILD_PATH)/%.o) $(SD_PATH)/libsundown.a
 
