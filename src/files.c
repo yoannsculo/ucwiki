@@ -341,7 +341,6 @@ int cp_dir(const char *source, const char *dest)
 		printf("Couldn't open %s : %s\n", source, strerror(errno));
 		return -1;
 	}
-	printf("on cree %s -> %s\n", source, dest);
 
 	while ((readdir_r(dir, &entry, &result) == 0) && result != 0) {
 		if (strcmp(entry.d_name, ".")  == 0 ||
@@ -381,10 +380,8 @@ err_file:
 
 void process_elt(char *path, struct s_tree_elt *ptr_tree)
 {
-	printf("path : %s (%d)\n", path, get_depth(path));
 	strcpy(ptr_tree->name, path);
 	ptr_tree->depth = get_depth(path);
-	// printf("On passe a %p (%d)\n", ptr_tree + sizeof(struct s_tree_elt), sizeof(struct s_tree_elt));
 }
 
 struct s_tree_elt *parse_dir(char *path, struct s_tree_elt *ptr_tree)
