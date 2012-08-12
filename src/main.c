@@ -9,7 +9,7 @@
 void usage()
 {
 	printf("Usage: -d\t: daemonize\n");
-	printf("       -k\t: stop daemon\n");
+	// printf("       -k\t: stop daemon\n");
 	printf("       -i\t: input directory\n");
 	printf("       -o\t: output directory\n");
 }
@@ -17,7 +17,7 @@ void usage()
 int main(int argc, char * argv[])
 {
 	int ret = 0;
-	int daemon = 0;
+	// int daemon = 0;
 	int c;
 	extern char *optarg;
 
@@ -31,9 +31,9 @@ int main(int argc, char * argv[])
 
 	while ((c = getopt(argc, argv, "dki:o:h")) != -1) {
 		switch(c) {
-			case 'd':
-				daemon = 1;
-				break;
+			// case 'd':
+			// 	daemon = 1;
+			// 	break;
 			case 'k':
 				// TODO
 				break;
