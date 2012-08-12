@@ -1,17 +1,18 @@
 CC = gcc
 BUILD_PATH = build
 EXEC = $(BUILD_PATH)/ucwiki
-SRC = $(wildcard src/*.c) 
-OBJ = $(SRC:src/%.c=$(BUILD_PATH)/%.o)
+SD_PATH=tanoku-sundown-11d2add
+SRC  = $(wildcard src/*.c)
+OBJ = $(SRC:src/%.c=$(BUILD_PATH)/%.o) $(SD_PATH)/libsundown.a
 
 INCLUDES = -Iinc \
 	   -I/usr/include \
-	   -I./tanoku-sundown-11d2add/src \
-	   -I./tanoku-sundown-11d2add/html \
+	   -I./$(SD_PATH)/src \
+	   -I./$(SD_PATH)/html \
 	   -I./ctemplate-1.0
 
 CFLAGS = -W -Wall -g
-LDFLAGS = -L/usr/lib -L$(BUILD_PATH) -lsundown
+LDFLAGS = -L/usr/lib -L$(BUILD_PATH)
 
 all: prepare sundown $(EXEC)
 
@@ -25,10 +26,10 @@ $(EXEC): $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 sundown:
-	make -C tanoku-sundown-11d2add
-	cp tanoku-sundown-11d2add/libsundown.so* $(BUILD_PATH)
+	make -C $(SD_PATH) libsundown.a
 
 clean:
 	-@(rm -f $(EXEC) $(OBJ))
-	make -C tanoku-sundown-11d2add clean
-	rm $(BUILD_PATH)/libsundown*
+
+clear: clean
+	make -C $(SD_PATH) clean
