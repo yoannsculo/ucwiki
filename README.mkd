@@ -8,6 +8,8 @@ files into nice html pages powered with bootstrap.
 The project is still in development, you can encounter some dirty bugs. Please don't
 hesitate to give me feedback. Thanks.
 
+- [Screenshot](http://www.yoannsculo.fr/images/ucwiki/ucwiki_screen.png)
+
 How to build it
 ---------------
 
