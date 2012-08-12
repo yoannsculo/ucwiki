@@ -64,7 +64,10 @@ void render_sidebar(FILE *fp, struct s_tree_elt *tree, struct s_tree_elt *page, 
 
 		if (is_dir(tree[i].name)) {
 			get_short_filename(tree[i].name, short_filename);
-			sprintf(string, "%s<li><span class=\"folder\">%s</span>\n", string, short_filename);
+			if (strstr(page->name, tree[i].name) == page->name)
+				sprintf(string, "%s<li><span class=\"folder\">%s</span>\n", string, short_filename);
+			else
+				sprintf(string, "%s<li class=\"closed\"><span class=\"folder\">%s</span>\n", string, short_filename);
 		} else {
 			get_short_filename_no_ext(tree[i].name, short_filename);
 			get_html_url(tree[i].name, output_dir, filename);
