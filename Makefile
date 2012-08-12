@@ -28,6 +28,9 @@ $(EXEC): $(OBJ)
 sundown:
 	make -C $(SD_PATH) libsundown.a
 
+strip:
+	strip $(EXEC)
+
 clean:
 	-@(rm -f $(EXEC) $(OBJ))
 
