@@ -4,6 +4,3 @@
 [submodule "extra/jquery-treeview"]
 	path = extra/jquery-treeview
 	url = git://github.com/jzaefferer/jquery-treeview.git
-[submodule "sundown"]
-	path = sundown
-	url = git@github.com:yoannsculo/sundown.git
