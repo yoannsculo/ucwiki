@@ -13,6 +13,7 @@ hesitate to give me feedback. Thanks.
 How to build it
 ---------------
 
+	git submodule init
 	git submodule update
 	make
 
