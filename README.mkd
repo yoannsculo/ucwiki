@@ -60,4 +60,5 @@ Dependencies
 LICENCE
 -------
 
-Noy yet decided.
+Licensed under the terms of the MIT License (MIT)
+See the file COPYING for details.
