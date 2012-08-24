@@ -57,7 +57,7 @@ Dependencies
 - [jQuery Treeview](https://github.com/jzaefferer/jquery-treeview) - for a fancy tree
 - [bootstrap](https://github.com/twitter/bootstrap/) - for a fancy css
 
-LICENCE
+LICENSE
 -------
 
 Licensed under the terms of the MIT License (MIT)
