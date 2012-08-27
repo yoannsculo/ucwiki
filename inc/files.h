@@ -21,6 +21,8 @@ struct s_tree_elt{
 int is_dir(const char *path);
 int is_file(const char *filename);
 
+int path_reformat(char *path);
+
 int get_current_dir(char *filename, char *current_dir);
 int get_depth(char *filename);
 int get_extension(char *extension, char *string);

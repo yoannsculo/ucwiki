@@ -42,6 +42,35 @@ int is_file(const char *filename)
 		return 0;
 }
 
+/* reformat the path into a relative one
+ * put a './' prefix if the path is not absolute
+ */
+int path_reformat(char *path)
+{
+	char *pch;
+	char new_path[PATH_MAX];
+
+	if (path == NULL)
+		return -1;
+
+	pch = strstr("./", path);
+
+	/* relative */
+	if (pch == path)
+		return 0;
+
+	/* absolute */
+	if (path[0] == '/')
+		return 0;
+
+
+	/* need reformatting */
+	sprintf(new_path, "./%s", path);
+	strcpy(path, new_path);
+
+	return 0;
+}
+
 /* like "pwd" but with a pilename as input */
 int get_current_dir(char *filename, char *current_dir)
 {

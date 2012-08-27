@@ -15,24 +15,35 @@ void usage()
 	printf("       -o\t: output directory\n");
 }
 
+
 static int check_parameters(char *input, char*output)
 {
 	if (input == NULL || output == NULL)
 		return -1;
 
-	if (!is_dir(input)) {
-		printf("Error : Invalid input directory\n");
-		return -1;
-	}
+	if (path_reformat(input) < 0)
+		goto err_input;
+
+	if (!is_dir(input))
+		goto err_input;
+
+	if (path_reformat(output) < 0)
+		goto err_output;
 
 	if (!is_dir(output)) {
-		if (create_dir(output) < 0) {
-			printf("Error : Couldn't create output directory\n");
-			return -1;
-		}
+		if (create_dir(output) < 0)
+			goto err_output;
 	}
 
 	return 0;
+
+err_input:
+	printf("Error : Invalid input directory\n");
+	return -1;
+
+err_output:
+	printf("Error : Couldn't create output directory\n");
+	return -1;
 }
 
 int main(int argc, char * argv[])

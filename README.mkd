@@ -45,7 +45,6 @@ TODO LIST
 ---------
 
 - [WISH] daemonize ucwiki to run in background and detect changes.
-- [BUG] ./ucwiki -i input -o output doesn't work
 - [WISH] handle yaml headers
 - [WISH] add a whitelist to copy just the files we need in extra.
 - [WISH] add an index.html at root dir
