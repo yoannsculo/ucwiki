@@ -409,6 +409,9 @@ err_file:
 
 void process_elt(char *path, struct s_tree_elt *ptr_tree)
 {
+	if (path == NULL || ptr_tree == NULL)
+		return;
+
 	strcpy(ptr_tree->name, path);
 	ptr_tree->depth = get_depth(path);
 }
@@ -421,7 +424,7 @@ struct s_tree_elt *parse_dir(char *path, struct s_tree_elt *ptr_tree)
 	struct stat entryInfo;
 	char path_name[PATH_MAX + 1];
 
-	if (path == NULL)
+	if (path == NULL || ptr_tree == NULL)
 		goto err;
 
 	if ((dir = opendir(path)) == NULL) {
@@ -461,7 +464,7 @@ int process_tree(struct s_tree_elt *tree, char *input_dir)
 {
 	int i;
 
-	if (input_dir == NULL)
+	if (tree == NULL || input_dir == NULL)
 		return -1;
 
 	for (i=0;i<200;i++) {
@@ -479,7 +482,7 @@ int process_files(struct s_tree_elt *tree, char *output_dir)
 	int i;
 	char path[PATH_MAX];
 
-	if (output_dir == NULL)
+	if (tree == NULL || output_dir == NULL)
 		return -1;
 
 	create_dir(output_dir);
