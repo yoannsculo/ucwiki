@@ -61,3 +61,8 @@ LICENSE
 
 Licensed under the terms of the MIT License (MIT)
 See the file COPYING for details.
+
+Contact
+-------
+
+Yoann Sculo - <yoann.sculo@gmail.com>
